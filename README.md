@@ -1,9 +1,42 @@
 # 🚀 3-Tier AWS Infrastructure Automation & Deployment
+
+![Terraform](https://img.shields.io/badge/Terraform-7B42BC?style=for-the-badge&logo=terraform&logoColor=white)
+![Ansible](https://img.shields.io/badge/Ansible-EE0000?style=for-the-badge&logo=ansible&logoColor=white)
+![AWS](https://img.shields.io/badge/Amazon_AWS-232F3E?style=for-the-badge&logo=amazon-aws&logoColor=white)
+![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white)
+![Node.js](https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white)
+
+A production-ready, highly secure, and automated 3-tier architecture deployed on Amazon Web Services (AWS). This project provisions the underlying infrastructure using **Terraform**, orchestrates containerized application deployment using **Ansible** & **Docker**, and implements strict network isolation best practices.
+
+👨‍💻 Developed by:
+  • Omar Hesham
+  • Ahmed Kamel
+  • Marwan Tarek
+  • Adham Mamdouh
+
+🎓 Affiliation: Information Technology Institute (ITI) - System Administration Intensive Program
+
+---
+
+## 🏗️ Architecture Overview
+AWS 3-Tier Architecture Diagram
+<img width="1400" height="782" alt="WhatsApp Image 2026-05-06 at 5 02 49 PM" src="https://github.com/user-attachments/assets/6fe21caa-8650-461c-8b8c-31ee56747c81" />
+
+
+The core objective of this architecture is **Total Total Isolation** and robust security. The traffic flows strictly in a unidirectional path, ensuring that the backend application and database are completely shielded from the public internet.
+
+**Traffic Flow:**
+`User` ➔ `External ALB` ➔ `Frontend Subnet (Nginx/HTML)` ➔ `Internal ALB` ➔ `Backend Subnet (Node.js/API)` ➔ `Database Subnet (PostgreSQL RDS)`
+
+### Key Security & Design Features:
+*   **VPC & Subnetting:** Custom VPC with 8 Subnets spread across 2 Availability Zones (Multi-AZ) for high availability.
+*   **Strict Security Groups:** The Backend EC2 instances only accept traffic from the Internal ALB. The RDS instance only accepts SSL-encrypted traffic from the Backend EC2 instances.
+*   **Nginx Reverse Proxy:** The frontend container serves the UI and acts as a reverse proxy, forwarding `/api/*` requests internally to the Backend Load Balancer.
 *   **Immutable Infrastructure:** EC2 instances are provisioned via Auto Scaling Groups (ASG) and Launch Templates.
 *   **Configuration Management:** Ansible dynamically fetches Terraform outputs (like ALB DNS and RDS endpoints) to configure and deploy Docker containers seamlessly.
 
 ---
-
 ## 📸 Project Showcase
 
 ### 1. The Application (Frontend UI)
